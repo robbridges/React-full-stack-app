@@ -5,6 +5,7 @@ const express = require('express');
 const morgan = require('morgan');
 const { sequelize, Users, Courses, } = require('./models');
 const router = require('./routes');
+const cors = require('cors');
 const apiRouter = require('./routes/api');
 
 
@@ -18,6 +19,9 @@ const app = express();
 app.use(morgan('dev'));
 // this is what gives our requests the ability to use the .json response without parsing the body
 app.use(express.json());
+
+//enable cors
+app.use(cors());
 
 // routes that we created for the app
 app.use('/', router);
