@@ -2,21 +2,17 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-/**
- * Courses Component
- *  - / home route
- *  - retrieves the list of courses from the REST API /api/courses route
- *  - renders list of courses
- *  - each course needs to link to its respective "Course Detail" screen
- *  - component renders a link to the "Create Course" screen
- */
+/*
+Main route that lists all of the courses, we are correctly pushing the courses to and allowing CORS, 
+we just need to find a way to display correctly, as the data is good the presentation of it is not.
+
+*/
 export default class Courses extends Component {
   state = {
-    // populate array with fetched data
     courses: [],
   };
 
-  // component first mounts (or on reload), make axios call to API to retrieve the list of courses in the database
+  // component first mounts (or on reload), make axios call to API to retrieve the list of courses in the database, we just need to correctly render them. 
   componentDidMount() {
     axios
       .get(`http://localhost:5000/api/courses`)
@@ -28,8 +24,7 @@ export default class Courses extends Component {
       })
       .catch((error) => {
         console.log('Error fetching and parsing data', error);
-        // push onto error stack
-        this.props.history.push('/error');
+
       });
   }
 
