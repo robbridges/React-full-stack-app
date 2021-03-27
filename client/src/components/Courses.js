@@ -18,7 +18,6 @@ export default class Courses extends Component {
       .then((data) => {
         this.setState({
           courses: data.data,
-          user: data.data.User,
         });
       })
       .catch((error) => {
