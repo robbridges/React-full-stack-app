@@ -28,11 +28,11 @@ export default class Courses extends Component {
 
   
 
-  //push the populated data into the app
+  //pushing data into the app, and setting up a link to each course
   render() {
     const results = this.state.courses;
     let courses = results.map((course) => (
-      <React.Fragment key={course.id}>
+      
         <div className='grid-33'>
           <Link
             className='course--module course--link'
@@ -42,12 +42,14 @@ export default class Courses extends Component {
             <h3 className='course--title'>{course.title}</h3>
           </Link>
         </div>
-      </React.Fragment>
+      
     ));
 
     return (
       <div className="wrap main--grid">
+        
         {courses}
+        
         <a 
         className="course--module course--add--module" 
         href='/courses/create'
