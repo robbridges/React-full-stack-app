@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
+
+
 export default class CourseDetail extends Component {
   state = {
+    
     course: [],
     user: [],
   }
@@ -29,7 +32,7 @@ render() {
     <main>
       <div className ='actions--bar'>
           <div className ="wrap">
-            <Link className ="button" to='/' >
+            <Link className ="button" to={`/courses/${course.id}/update`} >
               Update Course
             </Link>
             <Link className = "button" to ="/">
