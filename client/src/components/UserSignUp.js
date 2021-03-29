@@ -90,7 +90,7 @@ export default class UserSignUp extends Component {
               </div>
           </main>
       );
-  }
+  } 
 
   change = (event) => {
       const name = event.target.name;

@@ -15,7 +15,7 @@ function CourseDetailWithHooks(props) {
 
   useEffect(() => {
     axios(`http://localhost:5000/api/courses/${id}`)
-    .then(data => setCourse(data.data))
+    .then(data =>  setCourse(data.data))
     .catch(error => console.log('Something went wrong with the courses fetch'))
   }, [id,]);
 
@@ -41,7 +41,7 @@ function CourseDetailWithHooks(props) {
             <div>
               <h3 className="course--detail--title">Course</h3>
               <h4 className="course--name">{course.title}</h4>
-              <p>By   </p>
+              <p>By {course.User}   </p>
               <p>{course.description}</p>
             </div>
             <div>

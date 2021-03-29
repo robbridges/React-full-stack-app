@@ -15,7 +15,7 @@ export default class UpdateCourse extends Component {
     courseEstimatedTime: '',
     courseMaterialsNeeded: '',
     userFirstName: '',
-    userLastName: ''
+    userLastName: '',
 
   }
 
