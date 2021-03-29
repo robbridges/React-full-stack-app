@@ -17,26 +17,31 @@ import NotFound from './components/Error';
 
 
 const App = () => (
-  <Router>
-    <div>
-      <Header />
+  <div className="App">
+    <Router>
+      
+        <Header />
 
-      <Switch>
-        <Route exact path="/" component={Courses} />
-        <Route path="/signup" component={UserSignUp} />
-        <Route path="/signin" component={UserSignIn} />
-        <Route exact path ="/courses/:id" component={CourseDetail} />
-        <Route path ="/courses/:id/update" component={UpdateCourse} />
-        <Route exact path ="/courses/create" component={CreateCourse} />
-        <Route component={NotFound} />
-        
-        
+        <Switch>
+          <Route exact path="/" component={Courses} />
+          <Route path="/signup" component={UserSignUp} />
+          <Route path="/signin" component={UserSignIn} />
+          <Route path ="/courses/create" component={CreateCourse} />
+          <Route exact path ="/courses/:id" component={CourseDetail} />
+          <Route path ="/courses/:id/update" component={UpdateCourse} />
+          <Route path ="/courses/create" component={CreateCourse} />
+          <Route component={NotFound} />
+          
+          
 
-      </Switch>
+        </Switch>
 
-    </div>
+      
 
-  </Router>
+    </Router>
+
+
+</div>
 );
 
 export default App;

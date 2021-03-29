@@ -38,7 +38,7 @@ export default class Courses extends Component {
             className='course--module course--link'
             to={`/courses/${course.id}`}
           >
-            <h4 className='course--label'>Course</h4>
+            <h2 className='course--label'>Course</h2>
             <h3 className='course--title'>{course.title}</h3>
           </Link>
         
