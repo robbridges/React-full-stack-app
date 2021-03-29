@@ -35,7 +35,7 @@ export default class Courses extends Component {
       <React.Fragment key={course.id}>
         
           <Link
-            className='course--module course--link'
+            className="course--module course--link"
             to={`/courses/${course.id}`}
           >
             <h2 className='course--label'>Course</h2>
@@ -54,7 +54,7 @@ export default class Courses extends Component {
         {courses}
         
         <Link
-            className='course--module course--add--module'
+            className="course--module course--add--module"
             to='/courses/create'
           >
           <span className="course--add--title">
