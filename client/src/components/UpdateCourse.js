@@ -8,8 +8,7 @@ import Form from './Form';
 export default class UpdateCourse extends Component {
   // save all necessary inputs to state
   state = {
-    course: [],
-    user: [],
+    
     errors: [],
     courseTitle: '',
     courseDescription: '',
