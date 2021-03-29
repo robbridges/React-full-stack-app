@@ -22,8 +22,8 @@ const App = () => (
         <Route exact path="/" component={Courses} />
         <Route path="/signup" component={UserSignUp} />
         <Route path="/signin" component={UserSignIn} />
-        <Route exact path="/courses/:id" component={CourseDetail} />
-        <Route exact path="/courses/:id/update" component={UpdateCourse} />
+        <Route exact path ="/courses/:id" component={CourseDetail} />
+        <Route path ="/courses/:id/update" component={UpdateCourse} />
         <Route path ="/courses/create" component={CreateCourse} />
         
 

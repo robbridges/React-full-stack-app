@@ -14,7 +14,7 @@ export default class Courses extends Component {
   // once component mounted load the courses into the array to display
   componentDidMount() {
     axios
-      .get(`http://localhost:5000/api/courses`)
+    .get(`http://localhost:5000/api/courses`)
       .then((data) => {
         this.setState({
           courses: data.data,
@@ -32,8 +32,8 @@ export default class Courses extends Component {
   render() {
     const results = this.state.courses;
     let courses = results.map((course) => (
-      
-        <div className='grid-33'>
+      <React.Fragment key={course.id}>
+        
           <Link
             className='course--module course--link'
             to={`/courses/${course.id}`}
@@ -41,11 +41,14 @@ export default class Courses extends Component {
             <h4 className='course--label'>Course</h4>
             <h3 className='course--title'>{course.title}</h3>
           </Link>
-        </div>
+        
+      </React.Fragment>
+      
       
     ));
 
     return (
+      
       <div className="wrap main--grid">
         
         {courses}
@@ -60,8 +63,9 @@ export default class Courses extends Component {
               New Course
           </span>
         </a>
-  
+        
       </div>
+      
     )
   }
 }

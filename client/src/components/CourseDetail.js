@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,  } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -14,7 +14,7 @@ export default class CourseDetail extends Component {
 
   componentDidMount() {
     axios
-      .get(`http://localhost:5000/api/${this.props.match.url}`)
+      .get(`http://localhost:5000/api${this.props.match.url}`)
       .then((data) => {
         this.setState({ course: data.data, user: data.data.User });
       })
@@ -26,7 +26,7 @@ export default class CourseDetail extends Component {
   }
   
 render() {
-  const course = this.state.course;
+  const {course} = this.state;
   const user = `${this.state.user.firstName} ${this.state.user.lastName}`;
   return (
     <main>

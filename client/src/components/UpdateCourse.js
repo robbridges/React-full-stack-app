@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
 import axios from 'axios';
+import Form from './Form';
 
 
 
@@ -10,7 +10,7 @@ export default class UpdateCourse extends Component {
   state = {
     course: [],
     user: [],
-    
+    errors: [],
   }
 
   
@@ -32,45 +32,92 @@ export default class UpdateCourse extends Component {
   cancel = () => {
     this.props.history.push('/');
   }
-  getUserName = () => {
-    const user = `${this.state.user.firstName} ${this.state.user.lastName}`;
-    return user; 
-  }
+  
 
   render() {
   const {course} = this.state;
   const user = `${this.state.user.firstName} ${this.state.user.lastName}`;
-  
+  const {errors} = this.state;
     
     
 
   return (
-    <div className="wrap">
-      <h2>Update Course</h2>
-      <form>
-        <div className="main--flex">
-            <div>
-              <label htmlFor="courseTitle">Course Title</label>
-              <input id="courseTitle" name="courseTitle" type="text" defaultValue={course.title} />
-
-              <label htmlFor="courseAuthor">Course Author</label>
-              <input id="courseAuthor" name="courseAuthor" type="text" defaultValue={user}  />
-
-              <label htmlFor="courseDescription">Course Description</label>
-              <textarea id="courseDescription" name="courseDescription" defaultValue={course.description}></textarea>
+    <div className='bounds course--detail'>
+      <h1>Update Course</h1>
+      <Form
+        cancel={this.cancel}
+        errors={errors}
+        submit={this.submit}
+        submitButtonText='Update Course'
+        elements={() => (
+          <React.Fragment>
+            <div className='grid-66'>
+              <div className='course--header'>
+                <h4 className='course--label'>Course</h4>
+                <div>
+                  <input
+                    id='title'
+                    name='title'
+                    type='text'
+                    className='input-title course--title--input'
+                    placeholder='Course title...'
+                    value={course.title}
+                    onChange={this.change}
+                  />
+                </div>
+                <p>
+                  By {this.state.user.firstName} {this.state.user.lastName}
+                </p>
+              </div>
+              <div className='course--description'>
+                <div>
+                  <textarea
+                    id='description'
+                    name='description'
+                    placeholder='Course description...'
+                    value={course.description}
+                    onChange={this.change}
+                  ></textarea>
+                </div>
+              </div>
             </div>
-            <div>
-              <label htmlFor="estimatedTime">Estimated Time</label>
-              <input id="estimatedTime" name="estimatedTime" type="text" defaultValue={course.estimatedTime} />
-
-              <label htmlFor="materialsNeeded">Materials Needed</label>
-              <textarea id="materialsNeeded" name="materialsNeeded" defaultValue={course.materialsNeeded}></textarea>
+            <div className='grid-25 grid-right'>
+              <div className='course--stats'>
+                <ul className='course--stats--list'>
+                  <li className='course--stats--list--item'>
+                    <h4>Estimated Time</h4>
+                    <div>
+                      <input
+                        id='estimatedTime'
+                        name='estimatedTime'
+                        type='text'
+                        className='course--time--input'
+                        placeholder='Hours'
+                        value={course.estimatedTime}
+                        onChange={this.change}
+                      />
+                    </div>
+                  </li>
+                  <li className='course--stats--list--item'>
+                    <h4>Materials Needed</h4>
+                    <div>
+                      <textarea
+                        id='materialsNeeded'
+                        name='materialsNeeded'
+                        placeholder='List materials...'
+                        value={course.materialsNeeded}
+                        onChange={this.change}
+                      ></textarea>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-          <button className="button" type="submit">Update Course</button><button className="button button-secondary" onClick={this.cancel}>Cancel</button>
-      </form>    
-    </div>    
-  )
+          </React.Fragment>
+        )}
+      />
+    </div>
+  );
 
 }
 
