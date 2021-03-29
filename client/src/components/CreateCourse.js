@@ -15,24 +15,24 @@ export default class CreateCourse extends Component {
         <form>
           <div className="main--flex">
               <div>
-                <label for="courseTitle">Course Title</label>
-                <input id="courseTitle" name="courseTitle" type="text" value="" />
+                <label htmlFor="courseTitle">Course Title</label>
+                <input id="courseTitle" name="courseTitle" type="text" defaultValue="" />
   
-                <label for="courseAuthor">Course Author</label>
-                <input id="courseAuthor" name="courseAuthor" type="text" value="" />
+                <label htmlFor="courseAuthor">Course Author</label>
+                <input id="courseAuthor" name="courseAuthor" type="text" defaultValue="" />
   
-                <label for="courseDescription">Course Description</label>
+                <label htmlFor="courseDescription">Course Description</label>
                 <textarea id="courseDescription" name="courseDescription"></textarea>
               </div>
               <div>
-                <label for="estimatedTime">Estimated Time</label>
-                <input id="estimatedTime" name="estimatedTime" type="text" value="" />
+                <label htmlFor="estimatedTime">Estimated Time</label>
+                <input id="estimatedTime" name="estimatedTime" type="text" defaultValue="" />
   
-                <label for="materialsNeeded">Materials Needed</label>
+                <label htmlFor="materialsNeeded">Materials Needed</label>
                 <textarea id="materialsNeeded" name="materialsNeeded"></textarea>
               </div>
             </div>
-            <button class="button" type="submit">Update Course</button><button class="button button-secondary" onClick={this.cancel}>Cancel</button>
+            <button className="button" type="submit">Update Course</button><button className="button button-secondary" onClick={this.cancel}>Cancel</button>
         </form>    
       </div>    
     )
