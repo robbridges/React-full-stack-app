@@ -14,6 +14,7 @@ import UpdateCourse from './components/UpdateCourse';
 import CreateCourse from './components/CreateCourse';
 
 
+
 const App = () => (
   <Router>
     <div>
@@ -26,6 +27,7 @@ const App = () => (
         <Route exact path ="/courses/:id" component={CourseDetail} />
         <Route path ="/courses/:id/update" component={UpdateCourse} />
         <Route path ="/courses/create" component={CreateCourse} />
+        
         
 
       </Switch>

@@ -11,6 +11,13 @@ export default class UpdateCourse extends Component {
     course: [],
     user: [],
     errors: [],
+    courseTitle: '',
+    courseDescription: '',
+    courseEstimatedTime: '',
+    courseMaterialsNeeded: '',
+    userFirstName: '',
+    userLastName: ''
+
   }
 
   
@@ -20,12 +27,19 @@ export default class UpdateCourse extends Component {
     axios
       .get(`http://localhost:5000/api/courses/${id}`)
       .then((data) => {
-        this.setState({ course: data.data, user: data.data.User });
+        this.setState({ 
+          
+          userFirstName: data.data.User.firstName,
+          userLastName: data.data.User.lastName,
+          courseTitle: data.data.title,
+          courseDescription: data.data.description,
+          courseEstimatedTime: data.data.estimatedTime,
+          courseMaterialsNeeded: data.data.materialsNeeded,});
       })
       .catch((error) => {
         console.log('Error fetching and parsing data', error);
         
-        this.props.history.push('/notfound');
+        
       });
   }
 
@@ -35,7 +49,17 @@ export default class UpdateCourse extends Component {
   
 
   render() {
-  const {course, errors} = this.state;
+    const {
+      
+      userFirstName,
+      userLastName,
+      courseTitle,
+      courseDescription,
+      courseEstimatedTime,
+      courseMaterialsNeeded,
+      errors,
+    } = this.state;
+  
   
     
     
@@ -60,12 +84,12 @@ export default class UpdateCourse extends Component {
                     type='text'
                     className='input-title course--title--input'
                     placeholder='Course title...'
-                    value={course.title}
+                    value={courseTitle}
                     onChange={this.change}
                   />
                 </div>
                 <p>
-                  By {this.state.user.firstName} {this.state.user.lastName}
+                  By {userFirstName} {userLastName}
                 </p>
               
               <div className='course--description'>
@@ -74,7 +98,7 @@ export default class UpdateCourse extends Component {
                     id='description'
                     name='description'
                     placeholder='Course description...'
-                    value={course.description}
+                    value={courseDescription}
                     onChange={this.change}
                   ></textarea>
                 </div>
@@ -92,7 +116,7 @@ export default class UpdateCourse extends Component {
                         type='text'
                         className='course--time--input'
                         placeholder='Hours'
-                        value={course.estimatedTime}
+                        value={courseEstimatedTime}
                         onChange={this.change}
                       />
                     </div>
@@ -104,7 +128,7 @@ export default class UpdateCourse extends Component {
                         id='materialsNeeded'
                         name='materialsNeeded'
                         placeholder='List materials...'
-                        value={course.materialsNeeded}
+                        value={courseMaterialsNeeded}
                         onChange={this.change}
                       ></textarea>
                     </div>
@@ -119,5 +143,15 @@ export default class UpdateCourse extends Component {
   );
 
 }
+change = (event) => {
+  const name = event.target.name;
+  const value = event.target.value;
+
+  this.setState(() => {
+    return {
+      [name]: value,
+    };
+  });
+};
 
 }
