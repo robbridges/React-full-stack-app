@@ -15,7 +15,7 @@ export default class CourseDetail extends Component {
   componentDidMount() {
     const history = this.props.match.url;
     const id = history.substring(9)
-    console.log(id);
+    
     axios(`http://localhost:5000/api/courses/${id}`)
       .then((data) => {
         this.setState({ course: data.data, user: data.data.User });
