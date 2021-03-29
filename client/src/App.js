@@ -9,6 +9,7 @@ import Courses from './components/Courses';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import CourseDetail from './components/CourseDetail';
+//import CourseDetailWithHooks from './components/courseDetailWithHooks'
 import UpdateCourse from './components/UpdateCourse';
 import CreateCourse from './components/CreateCourse';
 
