@@ -13,7 +13,10 @@ export default class CourseDetail extends Component {
   }
   // get our data and set the current state of the course this is being called when we try to hit the link I'm not sure why, need to fix
   componentDidMount() {
-    axios(`http://localhost:5000/api${this.props.match.url}`)
+    const history = this.props.match.url;
+    const id = history.substring(9)
+    console.log(id);
+    axios(`http://localhost:5000/api/courses/${id}`)
       .then((data) => {
         this.setState({ course: data.data, user: data.data.User });
       })
@@ -25,6 +28,7 @@ export default class CourseDetail extends Component {
   }
   
 render() {
+  
   const {course} = this.state;
   const user = `${this.state.user.firstName} ${this.state.user.lastName}`;
   return (
