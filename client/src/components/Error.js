@@ -1,13 +1,12 @@
-import React from 'react';
+import React from 'react'
 
-function NotFound( ) {
+function Error() {
   return (
-    <div className="wrap">
-      <h1> Not found</h1>
-      <p> Sorry we couldn't find the page that you're looking for.</p>
-
-    </div>
+    <div class="wrap">
+      <h2>Error</h2>
+      <p>Sorry! We just encountered an unexpected error.</p>
+</div>
   )
 }
 
-export default NotFound;
+export default Error;

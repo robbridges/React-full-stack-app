@@ -1,4 +1,4 @@
-import config from './config';
+import config from './Config';
 
 export default class Data {
     api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
@@ -24,6 +24,8 @@ export default class Data {
 
         return fetch(url, options);
     }
+    
+    
     async getUser(emailAddress, password) {
       const response = await this.api('/users', 'GET', null, true, {
           emailAddress,
@@ -39,7 +41,9 @@ export default class Data {
       else {
           throw new Error();
       }
-  }
+    }
+
+
 
   async createUser(user) {
       const response = await this.api('/users', 'POST', user);

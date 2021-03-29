@@ -71,4 +71,30 @@ export default class UserSignIn extends Component {
         });
 
     }
+
+    submit = () => {
+        const {context} = this.props;
+        const {emailAddress, password} = this.state;
+        context.actions.signIn(emailAddress, password)
+    
+          .then(user => {
+            if (user === null) {
+              this.setState(() => {
+                return {errors: ['Sign-in was unsuccessful'] };
+              });
+            } else {
+              
+              console.log(`Sucesss ${emailAddress} is signed in`);
+            }
+          })
+          .catch( err => {
+            console.log(err);
+            
+          })
+      }
+      
+    
+      cancel = () => {
+        this.props.history.push('/');
+      }
   }

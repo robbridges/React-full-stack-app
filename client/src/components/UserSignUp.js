@@ -103,5 +103,42 @@ export default class UserSignUp extends Component {
       });
   }
 
+  submit = () => {
+      const {context} = this.props;
+      
+      const {
+          firstName,
+          lastName,
+          emailAddress,
+          password,
+          confirmPassword,
+      } = this.state;
+
+      const user ={
+          firstName,
+          lastName,
+          emailAddress,
+          password,
+          confirmPassword,
+      };
+
+      context.data.createUser(user)
+        .then(errors => {
+            if (errors.length) {
+                this.setState(({errors}));
+            } else {
+                console.log(`${emailAddress} is successully signed up`)
+            }
+        })
+        .catch( err => {
+            console.log(err);
+            this.props.history.push('/error');
+        })
+  }
+
+  cancel = () => {
+      this.props.history.push('/');
+  }
+
 
 }
