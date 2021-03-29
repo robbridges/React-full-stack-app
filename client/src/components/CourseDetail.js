@@ -11,16 +11,15 @@ export default class CourseDetail extends Component {
     course: [],
     user: [],
   }
-
+  // get our data and set the current state of the course this is being called when we try to hit the link I'm not sure why, need to fix
   componentDidMount() {
-    axios
-      .get(`http://localhost:5000/api${this.props.match.url}`)
+    axios(`http://localhost:5000/api${this.props.match.url}`)
       .then((data) => {
         this.setState({ course: data.data, user: data.data.User });
       })
       .catch((error) => {
         console.log('Error fetching and parsing data', error);
-        // push onto error stack
+        
         this.props.history.push('/notfound');
       });
   }
@@ -67,7 +66,7 @@ render() {
    </main>
    
    
-  )
+  );
 }
 
 }

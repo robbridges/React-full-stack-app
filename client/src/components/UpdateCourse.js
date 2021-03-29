@@ -35,9 +35,8 @@ export default class UpdateCourse extends Component {
   
 
   render() {
-  const {course} = this.state;
-  const user = `${this.state.user.firstName} ${this.state.user.lastName}`;
-  const {errors} = this.state;
+  const {course, errors} = this.state;
+  
     
     
 
@@ -51,7 +50,7 @@ export default class UpdateCourse extends Component {
         submitButtonText='Update Course'
         elements={() => (
           <React.Fragment>
-            <div className='grid-66'>
+            
               <div className='course--header'>
                 <h4 className='course--label'>Course</h4>
                 <div>
@@ -68,7 +67,7 @@ export default class UpdateCourse extends Component {
                 <p>
                   By {this.state.user.firstName} {this.state.user.lastName}
                 </p>
-              </div>
+              
               <div className='course--description'>
                 <div>
                   <textarea
@@ -81,7 +80,7 @@ export default class UpdateCourse extends Component {
                 </div>
               </div>
             </div>
-            <div className='grid-25 grid-right'>
+            
               <div className='course--stats'>
                 <ul className='course--stats--list'>
                   <li className='course--stats--list--item'>
@@ -112,7 +111,7 @@ export default class UpdateCourse extends Component {
                   </li>
                 </ul>
               </div>
-            </div>
+            
           </React.Fragment>
         )}
       />
