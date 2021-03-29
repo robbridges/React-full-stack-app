@@ -26,7 +26,7 @@ const App = () => (
         <Route path="/signin" component={UserSignIn} />
         <Route exact path ="/courses/:id" component={CourseDetail} />
         <Route path ="/courses/:id/update" component={UpdateCourse} />
-        <Route path ="/courses/create" component={CreateCourse} />
+        <Route exact path ="/courses/create" component={CreateCourse} />
         
         
 

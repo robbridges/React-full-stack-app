@@ -4,7 +4,7 @@ import Form from './Form';
 
 
 
-
+// our place holder for the update course page, right now just displays information have not wired the API request up to it yet. 
 export default class UpdateCourse extends Component {
   // save all necessary inputs to state
   state = {

@@ -55,7 +55,7 @@ export default class Courses extends Component {
         
         <Link
             className='course--module course--add--module'
-            to={'/courses/create'}
+            to='/courses/create'
           >
           <span className="course--add--title">
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
