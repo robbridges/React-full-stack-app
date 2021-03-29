@@ -63,7 +63,7 @@ export default class UpdateCourse extends Component {
     
 
   return (
-    <div className='bounds course--detail'>
+    <div className='wrap'>
       <h1>Update Course</h1>
       <Form
         cancel={this.cancel}
