@@ -7,12 +7,16 @@ export class Provider extends Component {
     super();
     //Allows us to access the helper class functions from Data.js
     this.data = new Data();
+    
   }
 
 
   render() {
     const value = {
       data: this.data,
+      actions: {
+        signIn: this.signIn,
+      }
     }
     return (
       <Context.Provider value={value}>
@@ -20,7 +24,20 @@ export class Provider extends Component {
       </Context.Provider>
     )
   }
+  signIn = async (emailAddress, password) => {
+    const user = await this.data.getUser(emailAddress, password);
+    if (user !== null) {
+      this.setState(() => {
+        return {
+          authenticatedUser: user,
+        }
+      });
+    }
+    return user;
+  }
 }
+
+
 
 //Wraps a provided component in Context.Consumer component. Subscribes component to all actions/context changes
 export default function withContext(Component) {

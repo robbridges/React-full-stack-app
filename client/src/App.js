@@ -17,6 +17,7 @@ import Error from './components/Error';
 import withContext from './Context';
 
 const UserSignUpWithContext = withContext(UserSignUp)
+const UserSignInWithContext = withContext(UserSignIn)
 
 
 
@@ -30,7 +31,7 @@ const App = () => (
         <Switch>
           <Route exact path="/" component={Courses} />
           <Route path="/signup" component={UserSignUpWithContext} />
-          <Route path="/signin" component={UserSignIn} />
+          <Route path="/signin" component={UserSignInWithContext} />
           <Route path ="/courses/create" component={CreateCourse} />
           <Route exact path ="/courses/:id" component={CourseDetail} />
           <Route path ="/courses/:id/update" component={UpdateCourse} />

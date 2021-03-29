@@ -83,12 +83,13 @@ export default class UserSignIn extends Component {
                 return {errors: ['Sign-in was unsuccessful'] };
               });
             } else {
-              
+              this.props.history.push('/')
               console.log(`Sucesss ${emailAddress} is signed in`);
             }
           })
           .catch( err => {
             console.log(err);
+            this.props.history.push('/error');
             
           })
       }
