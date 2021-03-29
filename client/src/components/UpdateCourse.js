@@ -23,8 +23,7 @@ export default class UpdateCourse extends Component {
 
   componentDidMount() {
     const id = this.props.match.params.id;
-    axios
-      .get(`http://localhost:5000/api/courses/${id}`)
+    axios(`http://localhost:5000/api/courses/${id}`)
       .then((data) => {
         this.setState({ 
           
