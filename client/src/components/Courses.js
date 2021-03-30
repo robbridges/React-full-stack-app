@@ -30,6 +30,7 @@ export default class Courses extends Component {
 
   //pushing data into the app, and setting up a link to each course
   render() {
+    
     const results = this.state.courses;
     let courses = results.map((course) => (
       <React.Fragment key={course.id}>

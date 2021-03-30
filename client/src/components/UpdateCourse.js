@@ -22,6 +22,7 @@ export default class UpdateCourse extends Component {
   
 
   componentDidMount() {
+    
     const id = this.props.match.params.id;
     axios(`http://localhost:5000/api/courses/${id}`)
       .then((data) => {
@@ -47,6 +48,7 @@ export default class UpdateCourse extends Component {
   
 
   render() {
+    
     const {
       
       userFirstName,
@@ -61,7 +63,7 @@ export default class UpdateCourse extends Component {
   
     
     
-
+  
   return (
     <div className='wrap'>
       <h1>Update Course</h1>
@@ -77,8 +79,8 @@ export default class UpdateCourse extends Component {
                 <h4 className='course--label'>Course</h4>
                 <div>
                   <input
-                    id='title'
-                    name='title'
+                    id='courseTitle'
+                    name='courseTitle'
                     type='text'
                     className='input-title course--title--input'
                     placeholder='Course title...'
@@ -93,8 +95,8 @@ export default class UpdateCourse extends Component {
               <div className='course--description'>
                 <div>
                   <textarea
-                    id='description'
-                    name='description'
+                    id='courseDescription'
+                    name='courseDescription'
                     placeholder='Course description...'
                     value={courseDescription}
                     onChange={this.change}
@@ -109,8 +111,8 @@ export default class UpdateCourse extends Component {
                     <h4>Estimated Time</h4>
                     <div>
                       <input
-                        id='estimatedTime'
-                        name='estimatedTime'
+                        id='courseEstimatedTime'
+                        name='courseEstimatedTime'
                         type='text'
                         className='course--time--input'
                         placeholder='Hours'
@@ -123,8 +125,8 @@ export default class UpdateCourse extends Component {
                     <h4>Materials Needed</h4>
                     <div>
                       <textarea
-                        id='materialsNeeded'
-                        name='materialsNeeded'
+                        id='courseMaterialsNeeded'
+                        name='courseMaterialsNeeded'
                         placeholder='List materials...'
                         value={courseMaterialsNeeded}
                         onChange={this.change}
@@ -150,6 +152,42 @@ change = (event) => {
       [name]: value,
     };
   });
+};
+
+submit = () => {
+  // context is my authenticatedUser
+  const { context } = this.props;
+  const user = context.authenticatedUser;
+  const authUserEmail = user.emailAddress;
+  const authUserPassword = user.password;
+  const userId = user.id;
+  const id = this.props.match.params.id;
+  const { title, description, estimatedTime, materialsNeeded } = this.state; // saves all entered data
+  const course = {
+    title,
+    description,
+    estimatedTime,
+    materialsNeeded,
+    userId,
+  };
+  // access the updateCourse API call in Data.js
+  context.data
+    .updateCourse(id, course, authUserEmail, authUserPassword)
+    .then((errors) => {
+      if (errors) {
+        this.setState({ errors });
+        return {
+          errors: [`Course ${course.title} was not updated in the database.`],
+        };
+      } else {
+        this.setState({ course });
+        this.props.history.push('/');
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      this.props.history.push('/forbidden');
+    });
 };
 
 }

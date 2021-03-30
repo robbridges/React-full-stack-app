@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
+import Form from './Form';
 
 export default class CreateCourse extends Component {
+  state = {
+    title: '',
+    description: '',
+    estimatedTime: '',
+    materialsNeeded: '',
+    errors: [],
+
+
+  }
 
   cancel = () => {
     this.props.history.push('/');
@@ -8,34 +18,144 @@ export default class CreateCourse extends Component {
 
 
   render() {
+    const {context} = this.props;
+    const {
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      errors,
+    } = this.state;
+
+    const authUser = context.authenticatedUser;
     return (
       <div className="wrap">
         <h2>Create Course</h2>
-        
-        <form>
-          <div className="main--flex">
-              <div>
-                <label htmlFor="courseTitle">Course Title</label>
-                <input id="courseTitle" name="courseTitle" type="text" defaultValue="" />
-  
-                <label htmlFor="courseAuthor">Course Author</label>
-                <input id="courseAuthor" name="courseAuthor" type="text" defaultValue="" />
-  
-                <label htmlFor="courseDescription">Course Description</label>
-                <textarea id="courseDescription" name="courseDescription"></textarea>
+        <Form
+          cancel={this.cancel}
+          errors={errors}
+          submit={this.submit}
+          submitButtonText='Create Course'
+          elements={() => (
+            <React.Fragment>
+              
+                <div className='course--header'>
+                  <h4 className='course--label'>Course</h4>
+                  <div>
+                    <input
+                      id='title'
+                      name='title'
+                      type='text'
+                      className='input-title course--title--input'
+                      placeholder='Course title...'
+                      value={title}
+                      onChange={this.change}
+                    />
+                  </div>
+                  <p>
+                    By {authUser.firstName} {authUser.lastName}
+                  </p>
+                
+                <div className='course--description'>
+                  <div>
+                    <textarea
+                      id='description'
+                      name='description'
+                      placeholder='Course description...'
+                      value={description}
+                      onChange={this.change}
+                    ></textarea>
+                  </div>
+                </div>
               </div>
-              <div>
-                <label htmlFor="estimatedTime">Estimated Time</label>
-                <input id="estimatedTime" name="estimatedTime" type="text" defaultValue="" />
-  
-                <label htmlFor="materialsNeeded">Materials Needed</label>
-                <textarea id="materialsNeeded" name="materialsNeeded"></textarea>
-              </div>
-            </div>
-            <button className="button" type="submit">Update Course</button><button className="button button-secondary" onClick={this.cancel}>Cancel</button>
-        </form>    
+              
+                <div className='course--stats'>
+                  <ul className='course--stats--list'>
+                    <li className='course--stats--list--item'>
+                      <h4>Estimated Time</h4>
+                      <div>
+                        <input
+                          id='estimatedTime'
+                          name='estimatedTime'
+                          type='text'
+                          className='course--time--input'
+                          placeholder='Hours'
+                          value={estimatedTime}
+                          onChange={this.change}
+                        />
+                      </div>
+                    </li>
+                    <li className='course--stats--list--item'>
+                      <h4>Materials Needed</h4>
+                      <div>
+                        <textarea
+                          id='materialsNeeded'
+                          name='materialsNeeded'
+                          placeholder='List materials...'
+                          value={materialsNeeded}
+                          onChange={this.change}
+                        ></textarea>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              
+            </React.Fragment>
+          )}
+        />
       </div>    
-    )
+    );
   }
+
+  change = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+  
+    this.setState(() => {
+      return {
+        [name]: value,
+      };
+    });
+  };
+
+  cancel = () => {
+    this.props.history.push('/');
+  }
+  
+  submit= () => {
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
+    const email = authUser.emailAddress;
+    const password = authUser.password;
+    const userId = authUser.id
+    const { title, description, estimatedTime, materialsNeeded } = this.state;
+    const course = {
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      userId,
+    };
+    context.data
+      .createCourse(course, email, password)
+      .then((errors) => {
+        if (errors.length) {
+          this.setState({ errors });
+          return {
+            errors: [`Course was not successfully created in the database`],
+          };
+        } else {
+          this.props.history.push('/');
+          console.log(
+            `Course ${title} has been successfully created by ${authUser.firstName} ${authUser.lastName}`
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        this.props.history.push('/error');
+      });
+  }
+
 }
 
