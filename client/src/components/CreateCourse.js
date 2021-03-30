@@ -108,9 +108,10 @@ export default class CreateCourse extends Component {
   }
 
   change = (event) => {
+    
     const name = event.target.name;
     const value = event.target.value;
-  
+    
     this.setState(() => {
       return {
         [name]: value,
@@ -123,12 +124,19 @@ export default class CreateCourse extends Component {
   }
   
   submit= () => {
-    const { context } = this.props;
-    const authUser = context.authenticatedUser;
-    const email = authUser.emailAddress;
-    const password = authUser.password;
-    const userId = authUser.id
-    const { title, description, estimatedTime, materialsNeeded } = this.state;
+    const {context} = this.props;
+    const user = context.authenticatedUser;
+    const userEmail = user.email;
+    const password = user.password;
+    const userId =user.id;
+
+    const { 
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      
+    }= this.state;
     const course = {
       title,
       description,
@@ -137,24 +145,26 @@ export default class CreateCourse extends Component {
       userId,
     };
     context.data
-      .createCourse(course, email, password)
+      .createCourse(course, userEmail, password)
       .then((errors) => {
         if (errors.length) {
           this.setState({ errors });
-          return {
-            errors: [`Course was not successfully created in the database`],
-          };
         } else {
           this.props.history.push('/');
-          console.log(
-            `Course ${title} has been successfully created by ${authUser.firstName} ${authUser.lastName}`
-          );
+          console.log(`Course has been created`);
         }
       })
       .catch((error) => {
         console.log(error);
         this.props.history.push('/error');
       });
+
+
+    
+  }
+
+  cancel = () => {
+    this.props.history.push('/');
   }
 
 }
