@@ -36,13 +36,12 @@ const App = () => (
 
         <Switch>
           <Route exact path="/" component={Courses} />
-          <Route path="/signup" component={UserSignUpWithContext} />
-          <Route path="/signin" component={UserSignInWithContext} />
-          <Route path="/signout" component={UserSignOutWithContext} />
           <PrivateRoute path ="/courses/create" component={CreateCourseWithContext} />
-          <Route exact path ="/courses/:id" component={CourseDetail} />
           <PrivateRoute path ="/courses/:id/update" component={UpdateCourseWithConext} />
-          <Route path ="/courses/create" component={CreateCourse} />
+          <Route exact path ="/courses/:id" component={CourseDetail} />
+          <Route path="/signin" component={UserSignInWithContext} />
+          <Route path="/signup" component={UserSignUpWithContext} />
+          <Route path="/signout" component={UserSignOutWithContext} />
           <Route path ="/error" component={Error} />
           <Route component={NotFound} />
           

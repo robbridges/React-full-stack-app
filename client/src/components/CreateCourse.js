@@ -27,7 +27,7 @@ export default class CreateCourse extends Component {
       errors,
     } = this.state;
 
-    const authUser = context.authenticatedUser;
+    const user = context.authenticatedUser;
     return (
       <div className="wrap">
         <h2>Create Course</h2>
@@ -53,7 +53,7 @@ export default class CreateCourse extends Component {
                     />
                   </div>
                   <p>
-                    By {authUser.firstName} {authUser.lastName}
+                    By {user.firstName} {user.lastName}
                   </p>
                 
                 <div className='course--description'>
@@ -144,6 +144,9 @@ export default class CreateCourse extends Component {
       materialsNeeded,
       userId,
     };
+
+    //console.log(userEmail);
+    //console.log(password);
     context.data
       .createCourse(course, userEmail, password)
       .then((errors) => {
@@ -158,6 +161,8 @@ export default class CreateCourse extends Component {
         console.log(error);
         this.props.history.push('/error');
       });
+
+      
 
 
     
