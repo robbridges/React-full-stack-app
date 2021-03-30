@@ -144,9 +144,9 @@ export default class CreateCourse extends Component {
       materialsNeeded,
       userId,
     };
-
-    //console.log(userEmail);
-    //console.log(password);
+    console.log(user);
+    console.log(userEmail);
+    console.log(password);
     context.data
       .createCourse(course, userEmail, password)
       .then((errors) => {
