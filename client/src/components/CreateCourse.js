@@ -127,6 +127,7 @@ export default class CreateCourse extends Component {
     const {context} = this.props;
     const user = context.authenticatedUser;
     const userEmail = user.email;
+    //const userEmail = user.emailAddress;
     const password = user.password;
     const userId =user.id;
 
