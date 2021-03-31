@@ -158,7 +158,7 @@ submit = () => {
   // context is my authenticatedUser
   const { context } = this.props;
   const user = context.authenticatedUser;
-  const authUserEmail = user.emailAddress;
+  const authUserEmail = user.email;
   const authUserPassword = user.password;
   const userId = user.id;
   const id = this.props.match.params.id;
@@ -176,9 +176,6 @@ submit = () => {
     .then((errors) => {
       if (errors) {
         this.setState({ errors });
-        return {
-          errors: [`Course ${course.title} was not updated in the database.`],
-        };
       } else {
         this.setState({ course });
         this.props.history.push('/');
@@ -186,7 +183,7 @@ submit = () => {
     })
     .catch((error) => {
       console.log(error);
-      this.props.history.push('/forbidden');
+      this.props.history.push('/error');
     });
 };
 

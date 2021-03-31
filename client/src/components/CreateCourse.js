@@ -12,10 +12,6 @@ export default class CreateCourse extends Component {
 
   }
 
-  cancel = () => {
-    this.props.history.push('/');
-  }
-
 
   render() {
     const {context} = this.props;
@@ -38,36 +34,38 @@ export default class CreateCourse extends Component {
           submitButtonText='Create Course'
           elements={() => (
             <React.Fragment>
-              
-                <div className='course--header'>
-                  <h4 className='course--label'>Course</h4>
-                  <div>
-                    <input
-                      id='title'
-                      name='title'
-                      type='text'
-                      className='input-title course--title--input'
-                      placeholder='Course title...'
-                      value={title}
-                      onChange={this.change}
-                    />
+                  
+                    <div className='course--header'>
+                      <h4 className='course--label'>Course</h4>
+                      <div>
+                        <input
+                          id='title'
+                          name='title'
+                          type='text'
+                          className='input-title course--title--input'
+                          placeholder='Course title...'
+                          value={title}
+                          onChange={this.change}
+                        />
+                      </div>
+                      <p>
+                        By {user.firstName} {user.lastName}
+                      </p>
+                    
+                    <div className='course--description'>
+                      <div>
+                        <textarea
+                          id='description'
+                          name='description'
+                          placeholder='Course description...'
+                          value={description}
+                          onChange={this.change}
+                        ></textarea>
+                      </div>
+                    </div>
                   </div>
-                  <p>
-                    By {user.firstName} {user.lastName}
-                  </p>
+                 
                 
-                <div className='course--description'>
-                  <div>
-                    <textarea
-                      id='description'
-                      name='description'
-                      placeholder='Course description...'
-                      value={description}
-                      onChange={this.change}
-                    ></textarea>
-                  </div>
-                </div>
-              </div>
               
                 <div className='course--stats'>
                   <ul className='course--stats--list'>
@@ -119,17 +117,16 @@ export default class CreateCourse extends Component {
     });
   };
 
-  cancel = () => {
-    this.props.history.push('/');
-  }
+  
   
   submit= () => {
     const {context} = this.props;
     const user = context.authenticatedUser;
-    const userEmail = user.email;
+    const userEmail = user.emailAddress;
     //const userEmail = user.emailAddress;
     const password = user.password;
-    const userId =user.id;
+    const userId = user.id;
+    
 
     const { 
       title,
@@ -139,27 +136,31 @@ export default class CreateCourse extends Component {
       
     }= this.state;
     const course = {
+      
       title,
       description,
       estimatedTime,
       materialsNeeded,
       userId,
+      
+      
     };
     console.log(user);
     console.log(userEmail);
-    console.log(password);
+    console.log(userId);
+    
     context.data
       .createCourse(course, userEmail, password)
-      .then((errors) => {
+      .then(errors => {
         if (errors.length) {
-          this.setState({ errors });
+            this.setState(({errors}));
         } else {
-          this.props.history.push('/');
-          console.log(`Course has been created`);
+            this.props.history.push('/');
+            console.log(`course successfully created`);
         }
-      })
-      .catch((error) => {
-        console.log(error);
+    })
+      .catch((err) => {
+        console.log(err);
         this.props.history.push('/error');
       });
 
