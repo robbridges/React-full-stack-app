@@ -25,84 +25,76 @@ export default class CreateCourse extends Component {
 
     const user = context.authenticatedUser;
     return (
-      <div className="wrap">
-        <h2>Create Course</h2>
-        <Form
-          cancel={this.cancel}
-          errors={errors}
-          submit={this.submit}
-          submitButtonText='Create Course'
-          elements={() => (
-            <React.Fragment>
-                  
-                    <div className='course--header'>
-                      <h4 className='course--label'>Course</h4>
-                      <div>
-                        <input
-                          id='title'
-                          name='title'
-                          type='text'
-                          className='input-title course--title--input'
-                          placeholder='Course title...'
-                          value={title}
-                          onChange={this.change}
-                        />
-                      </div>
-                      <p>
-                        By {user.firstName} {user.lastName}
-                      </p>
-                    
-                    <div className='course--description'>
-                      <div>
-                        <textarea
-                          id='description'
-                          name='description'
-                          placeholder='Course description...'
-                          value={description}
-                          onChange={this.change}
-                        ></textarea>
-                      </div>
-                    </div>
-                  </div>
-                 
-                
-              
-                <div className='course--stats'>
-                  <ul className='course--stats--list'>
-                    <li className='course--stats--list--item'>
-                      <h4>Estimated Time</h4>
-                      <div>
-                        <input
-                          id='estimatedTime'
-                          name='estimatedTime'
-                          type='text'
-                          className='course--time--input'
-                          placeholder='Hours'
-                          value={estimatedTime}
-                          onChange={this.change}
-                        />
-                      </div>
-                    </li>
-                    <li className='course--stats--list--item'>
-                      <h4>Materials Needed</h4>
-                      <div>
-                        <textarea
-                          id='materialsNeeded'
-                          name='materialsNeeded'
-                          placeholder='List materials...'
-                          value={materialsNeeded}
-                          onChange={this.change}
-                        ></textarea>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              
-            </React.Fragment>
-          )}
-        />
-      </div>    
-    );
+      <main>
+          <div className="wrap">
+              <h2>Create Course</h2>
+
+              <Form
+                  cancel={this.cancel}
+                  submit={this.submit}
+                  errors={errors}
+                  submitButtonText="Create Course"
+                  elements={() => (
+                      <React.Fragment>
+                          <div>
+                              <label htmlFor="courseTitle">
+                                  Course Title
+                                      </label>
+                              <input
+                                  id="title"
+                                  name="title"
+                                  type="text"
+                                  value={title}
+                                  onChange={this.change}
+                              />
+                              <label htmlFor="courseAuthor">
+                                  Course Author
+                                      </label>
+                              <input
+                                  id="courseAuthor"
+                                  name="courseAuthor"
+                                  type="text"
+                                  value={ `${user.firstName} ${user.lastName}` }
+                                  onChange={this.change}
+                              />
+                              <label htmlFor="courseDescription">
+                                  Course Description
+                                      </label>
+                              <textarea
+                                  id="description"
+                                  name="description"
+                                  value={description}
+                                  onChange={this.change}
+                              />
+                          </div>
+                          <div>
+                              <label htmlFor="estimatedTime">
+                                  Estimated Time
+                                      </label>
+                              <input
+                                  id="estimatedTime"
+                                  name="estimatedTime"
+                                  type="text"
+                                  value={estimatedTime}
+                                  onChange={this.change}
+                              />
+                              <label htmlFor="materialsNeeded">
+                                  Materials Needed
+                                      </label>
+                              <textarea
+                                  id="materialsNeeded"
+                                  name="materialsNeeded"
+                                  value={materialsNeeded}
+                                  onChange={this.change}
+                              />
+                          </div>
+
+                      </React.Fragment>
+                  )}
+              />
+          </div>
+      </main>
+  );
   }
 
   change = (event) => {

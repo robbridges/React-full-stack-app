@@ -23,6 +23,7 @@ const UserSignOutWithContext = withContext(UserSignOut);
 const HeaderWithContext = withContext(Header);
 const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithConext = withContext(UpdateCourse);
+const CourseDetailWithContext = withContext(CourseDetail);
 
 
 
@@ -38,7 +39,7 @@ const App = () => (
           <Route exact path="/" component={Courses} />
           <PrivateRoute path ="/courses/create" component={CreateCourseWithContext} />
           <PrivateRoute path ="/courses/:id/update" component={UpdateCourseWithConext} />
-          <Route exact path ="/courses/:id" component={CourseDetail} />
+          <Route exact path ="/courses/:id" component={CourseDetailWithContext} />
           <Route path="/signin" component={UserSignInWithContext} />
           <Route path="/signup" component={UserSignUpWithContext} />
           <Route path="/signout" component={UserSignOutWithContext} />

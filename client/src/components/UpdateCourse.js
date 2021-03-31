@@ -49,6 +49,7 @@ export default class UpdateCourse extends Component {
 
   render() {
     
+    
     const {
       
       userFirstName,
@@ -63,7 +64,7 @@ export default class UpdateCourse extends Component {
   
     
     
-  
+    
   return (
     <div className='wrap'>
       <h1>Update Course</h1>
@@ -155,11 +156,11 @@ change = (event) => {
 };
 
 submit = () => {
-  // context is my authenticatedUser
+  
   const { context } = this.props;
   const user = context.authenticatedUser;
-  const authUserEmail = user.email;
-  const authUserPassword = user.password;
+  const userEmail = user.emailAddress;
+  const userPassword = user.password;
   const userId = user.id;
   const id = this.props.match.params.id;
   const { title, description, estimatedTime, materialsNeeded } = this.state; // saves all entered data
@@ -170,9 +171,10 @@ submit = () => {
     materialsNeeded,
     userId,
   };
-  // access the updateCourse API call in Data.js
+  console.log(user);
+  //update the course using the api method in data
   context.data
-    .updateCourse(id, course, authUserEmail, authUserPassword)
+    .updateCourse(id, course, userEmail, userPassword)
     .then((errors) => {
       if (errors) {
         this.setState({ errors });

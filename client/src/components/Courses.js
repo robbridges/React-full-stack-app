@@ -26,6 +26,20 @@ export default class Courses extends Component {
       });
   }
 
+  // componentDidUpdate() {
+  //   axios
+  //   .get(`http://localhost:5000/api/courses`)
+  //     .then((data) => {
+  //       this.setState({
+  //         courses: data.data,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.log('Error fetching and parsing data', error);
+  //       this.props.history.push('/');
+  //     });
+  // }
+
   
 
   //pushing data into the app, and setting up a link to each course

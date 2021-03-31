@@ -8,10 +8,10 @@ import axios from 'axios';
 export default class CourseDetail extends Component {
   state = {
     
-    courseTitle: '',
-    courseDescription: '',
-    courseEstimatedTime: '',
-    courseMaterialsNeeded: '',
+    title: '',
+    description: '',
+    estimatedTime: '',
+    materialsNeeded: '',
     userFirstName: '',
     userLastName: ''
 
@@ -40,6 +40,39 @@ export default class CourseDetail extends Component {
       });
   }
   
+
+  delete = () => {
+    const {context} = this.props;
+    const user = context.authenticatedUser;
+    const {id} = this.props.match.params;
+    const userId = user.id;
+    
+    const { 
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      
+    }= this.state;
+    
+    const course = {
+      
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      userId,
+      
+      
+    };
+
+    const confirmation = window.confirm(`Are you sure you want to delete the course "${course.title}"?`);
+        if (confirmation) {
+            context.data.deleteCourse(id, user.emailAddress, user.password);
+            this.props.history.push('/');
+    }
+  }
+  
 render() {
   
   const {
@@ -59,7 +92,7 @@ render() {
             <Link className ="button" to={`/courses/${courseId}/update`} >
               Update Course
             </Link>
-            <Link className = "button" to ="/">
+            <Link className = "button"  onClick={this.delete}>
               Delete Course
             </Link>
             <Link className = "button" to='/'>
