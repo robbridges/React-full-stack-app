@@ -9,13 +9,14 @@ export default class UpdateCourse extends Component {
   // save all necessary inputs to state
   state = {
     
-    errors: [],
-    courseTitle: '',
-    courseDescription: '',
-    courseEstimatedTime: '',
-    courseMaterialsNeeded: '',
+    
+    title: '',
+    description: '',
+    estimatedTime: '',
+    materialsNeeded: '',
     userFirstName: '',
     userLastName: '',
+    errors: [],
 
   }
 
@@ -30,10 +31,10 @@ export default class UpdateCourse extends Component {
           
           userFirstName: data.data.User.firstName,
           userLastName: data.data.User.lastName,
-          courseTitle: data.data.title,
-          courseDescription: data.data.description,
-          courseEstimatedTime: data.data.estimatedTime,
-          courseMaterialsNeeded: data.data.materialsNeeded,});
+          title: data.data.title,
+          description: data.data.description,
+          estimatedTime: data.data.estimatedTime,
+          materialsNeeded: data.data.materialsNeeded,});
       })
       .catch((error) => {
         console.log('Error fetching and parsing data', error);
@@ -51,13 +52,13 @@ export default class UpdateCourse extends Component {
     
     
     const {
-      
       userFirstName,
       userLastName,
-      courseTitle,
-      courseDescription,
-      courseEstimatedTime,
-      courseMaterialsNeeded,
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      
       errors,
     } = this.state;
   
@@ -68,6 +69,7 @@ export default class UpdateCourse extends Component {
   return (
     <div className='wrap'>
       <h1>Update Course</h1>
+      <br />
       <Form
         cancel={this.cancel}
         errors={errors}
@@ -75,67 +77,62 @@ export default class UpdateCourse extends Component {
         submitButtonText='Update Course'
         elements={() => (
           <React.Fragment>
-            
-              <div className='course--header'>
-                <h4 className='course--label'>Course</h4>
-                <div>
-                  <input
-                    id='courseTitle'
-                    name='courseTitle'
-                    type='text'
-                    className='input-title course--title--input'
-                    placeholder='Course title...'
-                    value={courseTitle}
-                    onChange={this.change}
-                  />
-                </div>
-                <p>
-                  By {userFirstName} {userLastName}
-                </p>
               
-              <div className='course--description'>
-                <div>
-                  <textarea
-                    id='courseDescription'
-                    name='courseDescription'
-                    placeholder='Course description...'
-                    value={courseDescription}
-                    onChange={this.change}
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-            
-              <div className='course--stats'>
-                <ul className='course--stats--list'>
-                  <li className='course--stats--list--item'>
-                    <h4>Estimated Time</h4>
-                    <div>
-                      <input
-                        id='courseEstimatedTime'
-                        name='courseEstimatedTime'
-                        type='text'
-                        className='course--time--input'
-                        placeholder='Hours'
-                        value={courseEstimatedTime}
-                        onChange={this.change}
-                      />
-                    </div>
-                  </li>
-                  <li className='course--stats--list--item'>
-                    <h4>Materials Needed</h4>
-                    <div>
-                      <textarea
-                        id='courseMaterialsNeeded'
-                        name='courseMaterialsNeeded'
-                        placeholder='List materials...'
-                        value={courseMaterialsNeeded}
-                        onChange={this.change}
-                      ></textarea>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              <div className="main--flex">
+                            <div>
+                              <label htmlFor="courseTitle">
+                                  Course Title
+                                      </label>
+                              <input
+                                  id="title"
+                                  name="title"
+                                  type="text"
+                                  value={title}
+                                  onChange={this.change}
+                              />
+                              <label htmlFor="courseAuthor">
+                                  Course Author
+                                      </label>
+                              <input
+                                  id="courseAuthor"
+                                  name="courseAuthor"
+                                  type="text"
+                                  readOnly value={`${userFirstName} ${userLastName}`}
+                                  onChange={this.change}
+                              />
+                              <label htmlFor="courseDescription">
+                                  Course Description
+                                      </label>
+                              <textarea
+                                  id="description"
+                                  name="description"
+                                  value={description}
+                                  onChange={this.change}
+                              />
+                            </div>  
+                          
+                          <div>
+                              <label htmlFor="estimatedTime">
+                                  Estimated Time
+                                      </label>
+                              <input
+                                  id="estimatedTime"
+                                  name="estimatedTime"
+                                  type="text"
+                                  value={estimatedTime}
+                                  onChange={this.change}
+                              />
+                              <label htmlFor="materialsNeeded">
+                                  Materials Needed
+                                      </label>
+                              <textarea
+                                  id="materialsNeeded"
+                                  name="materialsNeeded"
+                                  value={materialsNeeded}
+                                  onChange={this.change}
+                              />
+                          </div>
+                        </div>
             
           </React.Fragment>
         )}

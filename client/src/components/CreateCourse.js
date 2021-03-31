@@ -36,7 +36,8 @@ export default class CreateCourse extends Component {
                   submitButtonText="Create Course"
                   elements={() => (
                       <React.Fragment>
-                          <div>
+                          <div className="main--flex">
+                            <div>
                               <label htmlFor="courseTitle">
                                   Course Title
                                       </label>
@@ -66,7 +67,8 @@ export default class CreateCourse extends Component {
                                   value={description}
                                   onChange={this.change}
                               />
-                          </div>
+                            </div>  
+                          
                           <div>
                               <label htmlFor="estimatedTime">
                                   Estimated Time
@@ -88,6 +90,7 @@ export default class CreateCourse extends Component {
                                   onChange={this.change}
                               />
                           </div>
+                        </div>
 
                       </React.Fragment>
                   )}
