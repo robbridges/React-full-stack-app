@@ -92,7 +92,7 @@ render() {
             <Link className ="button" to={`/courses/${courseId}/update`} >
               Update Course
             </Link>
-            <Link className = "button"  onClick={this.delete}>
+            <Link className = "button" to='/'  onClick={this.delete}>
               Delete Course
             </Link>
             <Link className = "button" to='/'>
