@@ -148,7 +148,7 @@ export default class CreateCourse extends Component {
       .createCourse(course, userEmail, password)
       .then(errors => {
         if (errors.length) {
-            this.setState(({errors}));
+              this.setState(({errors}));
         } else {
             this.props.history.push('/');
             console.log(`course successfully created`);

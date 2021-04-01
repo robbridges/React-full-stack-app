@@ -81,8 +81,13 @@ router.post('/courses', authenticateUser, asyncHandler(async (req, res) => {
     const course = await Course.create(req.body);
     res.status(201).location(`/api/courses/${course.id}`).json();
   } catch (error) {
-    const errors = error.errors.map(err => err.message);
-    res.status(400).json(errors);
+    if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
+      const errors = error.errors.map(err => err.message);
+      res.status(400).json({errors});
+    } else {
+      const errors = error.errors.map(err => err.message);  
+      res.json(errors);
+    }
     
   }
 }));
@@ -101,9 +106,15 @@ router.put('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
       res.status(404).json({message: 'Course not found'});
     } 
   } catch (error) {
-    const errors = error.errors.map(err => err.message);
-    res.status(400).json(errors);
-  } 
+    if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
+      const errors = error.errors.map(err => err.message);
+      res.status(400).json({errors});
+    } else {
+      const errors = error.errors.map(err => err.message);  
+      res.json(errors);
+    }
+    
+  }
 }));
 // deletes a course, but only if the user who created the course is the currently authorized user, otherwise returns a 403 error
 router.delete('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
