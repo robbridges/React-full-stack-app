@@ -120,6 +120,7 @@ render() {
               <h3 className="course--detail--title">Course</h3>
               <h4 className="course--name">{courseTitle}</h4>
               <p>By {userFirstName} {userLastName} </p>
+              {/* React markdown package, makes course material more cross platfrom friendly */}
               <p> <ReactMarkdown source ={courseDescription} /> </p>
             </div>
             <div>
@@ -127,6 +128,7 @@ render() {
               <p>{courseEstimatedTime}</p>
               <h3 className="course--detail--title">Materials Needed</h3>
               <ul className="course--detail--list">
+                {/* React markdown package, makes course material more cross platfrom friendly */}
                 <ReactMarkdown source ={courseMaterialsNeeded} />
               </ul>
             </div>
