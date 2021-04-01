@@ -13,7 +13,8 @@ export default class CourseDetail extends Component {
     estimatedTime: '',
     materialsNeeded: '',
     userFirstName: '',
-    userLastName: ''
+    userLastName: '',
+    userEmail: '',
 
   }
   // get our data and set the current state of the course this is being called when we try to hit the link I'm not sure why, need to fix
@@ -26,6 +27,7 @@ export default class CourseDetail extends Component {
           courseId: data.data.id,  
           userFirstName: data.data.User.firstName,
           userLastName: data.data.User.lastName,
+          userEmail: data.data.User.emailAddress,
           courseTitle: data.data.title,
           courseDescription: data.data.description,
           courseEstimatedTime: data.data.estimatedTime,
@@ -74,30 +76,40 @@ export default class CourseDetail extends Component {
   }
   
 render() {
-  
+  const {context} = this.props;
   const {
       courseId,
       userFirstName,
       userLastName,
+      userEmail,
       courseTitle,
       courseDescription,
       courseEstimatedTime,
       courseMaterialsNeeded,
       
     } = this.state;
+    const user = context.authenticatedUser;
   return (
     <main>
       <div className ='actions--bar'>
           <div className ="wrap">
+          { user.emailAddress === userEmail ?
+          <React.Fragment>
             <Link className ="button" to={`/courses/${courseId}/update`} >
               Update Course
             </Link>
             <Link className = "button" to='/'  onClick={this.delete}>
               Delete Course
             </Link>
+            <Link className="button" to="/">Return to List</Link>
+          </React.Fragment>  
+          :
+          <React.Fragment>
             <Link className = "button" to='/'>
               Return to List
             </Link>
+          </React.Fragment>  
+          }
           </div>
       </div>
       <div className="wrap">
