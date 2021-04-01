@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
-
+// user sign up page, creates a user in the database and adds that to the current state of the app
 export default class UserSignUp extends Component {
   state = {
       firstName: '',
@@ -91,7 +91,7 @@ export default class UserSignUp extends Component {
           </main>
       );
   } 
-
+  // on change event that updates any values in state upon their change
   change = (event) => {
       const name = event.target.name;
       const value = event.target.value;
@@ -135,7 +135,7 @@ export default class UserSignUp extends Component {
             this.props.history.push('/error');
         })
   }
-
+  // cancel button simply sends user back to the main course index
   cancel = () => {
       this.props.history.push('/');
   }

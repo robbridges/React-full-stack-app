@@ -1,5 +1,5 @@
 import React from 'react';
-
+// this handles and displays our error validation and feeds them into the app
 const Form = (props) => {
   const { cancel, errors, submit, submitButtonText, elements } = props;
 

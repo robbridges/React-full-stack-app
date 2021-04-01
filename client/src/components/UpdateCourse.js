@@ -4,7 +4,7 @@ import Form from './Form';
 
 
 
-// our place holder for the update course page, right now just displays information have not wired the API request up to it yet. 
+// update course is now wired up and working 
 export default class UpdateCourse extends Component {
   // save all necessary inputs to state
   state = {
@@ -21,7 +21,7 @@ export default class UpdateCourse extends Component {
   }
 
   
-
+  // pull teh current course details from state and populates them into the form
   componentDidMount() {
     
     const id = this.props.match.params.id;
@@ -34,7 +34,8 @@ export default class UpdateCourse extends Component {
           title: data.data.title,
           description: data.data.description,
           estimatedTime: data.data.estimatedTime,
-          materialsNeeded: data.data.materialsNeeded,});
+          materialsNeeded: data.data.materialsNeeded,
+        });
       })
       .catch((error) => {
         console.log('Error fetching and parsing data', error);
@@ -42,7 +43,7 @@ export default class UpdateCourse extends Component {
         
       });
   }
-
+  // returns user to main index
   cancel = () => {
     this.props.history.push('/');
   }
@@ -93,6 +94,7 @@ export default class UpdateCourse extends Component {
                               <label htmlFor="courseAuthor">
                                   Course Author
                                       </label>
+                              {/* set value to read only as there should be no reason to update course author */}        
                               <input
                                   id="courseAuthor"
                                   name="courseAuthor"
@@ -139,7 +141,7 @@ export default class UpdateCourse extends Component {
       />
     </div>
   );
-
+// updates any changes on the form to state
 }
 change = (event) => {
   const name = event.target.name;
@@ -151,7 +153,7 @@ change = (event) => {
     };
   });
 };
-
+// request to data.js that actually calls the method into our api in teh app
 submit = () => {
   
   const { context } = this.props;

@@ -12,7 +12,7 @@ export default class CreateCourse extends Component {
 
   }
 
-
+  // setting up on our context values and values to be used in react component  
   render() {
     const {context} = this.props;
     const {
@@ -99,7 +99,7 @@ export default class CreateCourse extends Component {
       </main>
   );
   }
-
+  // on change lisener that sets state of whatever we're updating
   change = (event) => {
     
     const name = event.target.name;
@@ -113,12 +113,11 @@ export default class CreateCourse extends Component {
   };
 
   
-  
+  // submit function, pushes the new course into state
   submit= () => {
     const {context} = this.props;
     const user = context.authenticatedUser;
     const userEmail = user.emailAddress;
-    //const userEmail = user.emailAddress;
     const password = user.password;
     const userId = user.id;
     
@@ -140,10 +139,8 @@ export default class CreateCourse extends Component {
       
       
     };
-    console.log(user);
-    console.log(userEmail);
-    console.log(userId);
-    
+
+    // this api call is stored in data.js that is part of context   
     context.data
       .createCourse(course, userEmail, password)
       .then(errors => {
@@ -165,7 +162,7 @@ export default class CreateCourse extends Component {
 
     
   }
-
+  // returns user to main index
   cancel = () => {
     this.props.history.push('/');
   }

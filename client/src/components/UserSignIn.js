@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
-
+// user sign in form, it has data fed into it from context.js sign in method
 export default class UserSignIn extends Component {
     state = {
         emailAddress: '',
@@ -59,7 +59,7 @@ export default class UserSignIn extends Component {
             </main>
         );
     }
-
+    // on change listener, updates whatever we're changing in state
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -71,7 +71,7 @@ export default class UserSignIn extends Component {
         });
 
     }
-
+    // pulls the email and password from the form and compares it to the database. Returning successful
     submit = () => {
         const {context} = this.props;
         const {emailAddress, password} = this.state;
@@ -94,7 +94,7 @@ export default class UserSignIn extends Component {
           })
       }
       
-    
+      // simply returns user back to the main index
       cancel = () => {
         this.props.history.push('/');
       }

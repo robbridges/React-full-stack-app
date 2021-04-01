@@ -1,6 +1,6 @@
 import React, { Component, } from 'react';
 import { Link } from 'react-router-dom';
-
+// Header component we change what is displayed if the user is logged in
 export default class Header extends Component {
   render() {
     const {context} = this.props;

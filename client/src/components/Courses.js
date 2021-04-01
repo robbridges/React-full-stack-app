@@ -26,23 +26,11 @@ export default class Courses extends Component {
       });
   }
 
-  // componentDidUpdate() {
-  //   axios
-  //   .get(`http://localhost:5000/api/courses`)
-  //     .then((data) => {
-  //       this.setState({
-  //         courses: data.data,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log('Error fetching and parsing data', error);
-  //       this.props.history.push('/');
-  //     });
-  // }
+ 
 
   
 
-  //pushing data into the app, and setting up a link to each course
+  // setting up on our context values and values to be used in react component  
   render() {
     
     const results = this.state.courses;

@@ -1,5 +1,5 @@
 import React from 'react'
-
+// simple error component. Used in catch statements during error handling
 function Error() {
   return (
     <div className="wrap">

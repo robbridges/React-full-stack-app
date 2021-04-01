@@ -25,7 +25,7 @@ export default class Data {
         return fetch(url, options);
     }
     
-    
+    // checks our database for a user that corresponds to email address and password
     async getUser(emailAddress, password) {
       const response = await this.api('/users', 'GET', null, true, {emailAddress, password});
 
@@ -41,8 +41,8 @@ export default class Data {
     }
 
 
-
-  async createUser(user) {
+    // creates user in our data base
+    async createUser(user) {
       const response = await this.api('/users', 'POST', user);
       if (response.status === 201) {
           return [];
@@ -55,9 +55,9 @@ export default class Data {
       else {
           throw new Error();
       }
-  }
-
-  async createCourse(course, emailAddress, password) {
+    }
+    // creates coursee in our database
+    async createCourse(course, emailAddress, password) {
     const response = await this.api('/courses', 'POST', course, true, {emailAddress, password})
     if (response.status === 201) {
       return [];
@@ -70,9 +70,9 @@ export default class Data {
     else {
       throw new Error();
     }
-  }
-
-  async updateCourse(id, course, emailAddress, password) {
+    }
+    // update course method from our database
+    async updateCourse(id, course, emailAddress, password) {
     const response = await this.api('/courses/'+id, 'PUT', course, true, {emailAddress, password});
     if (response.status === 204) {
       console.log('Course updated')
@@ -86,7 +86,7 @@ export default class Data {
       throw new Error();
     }
   }
-
+  // delete course method from our database
   async deleteCourse(id, emailAddress, password) {
     const response = await this.api('/courses/'+id, 'DELETE', null, true, {emailAddress, password});
     if (response.status === 204) {

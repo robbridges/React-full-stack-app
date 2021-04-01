@@ -26,6 +26,7 @@ export class Provider extends Component {
         signOut: this.signOut,
       }
     }
+    // wraps all of our components that call context into the component
     return (
       <Context.Provider value={value}>
         {this.props.children}
@@ -33,7 +34,7 @@ export class Provider extends Component {
     )
   }
 
-
+  // sign in method that pulls from the data class to make sure that the user exists in the data base
   signIn = async (emailAddress, password) => {
     const user = await this.data.getUser(emailAddress, password);
     if (user !== null) {
@@ -43,12 +44,12 @@ export class Provider extends Component {
           authenticatedUser: user,
         };
       });
-      
+      //persisting user credentials via a short lived cookie
       Cookies.set('authenticatedUser', JSON.stringify(user), {expires: 1});
     }
     return user;
   }
-
+  // sign out method that sets the authenticated user state to null
   signOut = () => {
     this.setState(() => {
       return {

@@ -16,7 +16,8 @@ import NotFound from './components/NotFound';
 import Error from './components/Error';
 import withContext from './Context';
 import PrivateRoute from './PrivateRoute';
-
+/* we are using our context class to make sure all the With context components below can access our database methods
+and user context saved in state */
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
 const UserSignOutWithContext = withContext(UserSignOut);

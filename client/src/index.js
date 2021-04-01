@@ -5,7 +5,7 @@ import './styles/global.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from './Context';
-
+// using our provider from context to give the entire app access to context if we call a compoent with it
 ReactDOM.render(
   <React.StrictMode>
     <Provider>

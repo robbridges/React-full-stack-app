@@ -1,5 +1,5 @@
 import React from 'react';
-
+// simple not found, used mostly if user manually enters bad input into the url, as our app should handle all correct requests
 function NotFound( ) {
   return (
     <div className="wrap">
