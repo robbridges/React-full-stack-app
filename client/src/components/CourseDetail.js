@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link,  } from 'react-router-dom';
 import axios from 'axios';
-
+import ReactMarkdown from 'react-markdown';
 
 
 
@@ -120,14 +120,14 @@ render() {
               <h3 className="course--detail--title">Course</h3>
               <h4 className="course--name">{courseTitle}</h4>
               <p>By {userFirstName} {userLastName} </p>
-              <p>{courseDescription}</p>
+              <p> <ReactMarkdown source ={courseDescription} /> </p>
             </div>
             <div>
               <h3 className="course--detail--title">Estimated Time</h3>
               <p>{courseEstimatedTime}</p>
               <h3 className="course--detail--title">Materials Needed</h3>
               <ul className="course--detail--list">
-                {courseMaterialsNeeded}
+                <ReactMarkdown source ={courseMaterialsNeeded} />
               </ul>
             </div>
           </div>
