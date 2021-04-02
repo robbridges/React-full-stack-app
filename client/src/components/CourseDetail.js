@@ -71,7 +71,8 @@ export default class CourseDetail extends Component {
     const confirmation = window.confirm(`Are you sure you want to delete the course "${course.title}"?`);
         if (confirmation) {
             context.data.deleteCourse(id, user.emailAddress, user.password);
-            this.props.history.push('/');
+            this.props.history.push('/')
+            
     }
   }
 // setting up on our context values and values to be used in react component  
@@ -88,7 +89,7 @@ render() {
       courseMaterialsNeeded,
       
     } = this.state;
-    const user = context.authenticatedUser;
+    const user = context.authenticatedUser || {id:null};
   return (
     <main>
       <div className ='actions--bar'>

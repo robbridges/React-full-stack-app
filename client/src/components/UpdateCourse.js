@@ -21,40 +21,13 @@ export default class UpdateCourse extends Component {
 
   }
 
-  getCourse = async () => {
-    const {context} = this.props;
-    const authUser = context.authenticatedUser;
-    const authUserEmail = authUser.emailAddress;
-    console.log(authUserEmail);
-    const id = this.props.match.params.id;
-    axios(`http://localhost:5000/api/courses/${id}`)
-      .then((data) => {
-        
-          this.setState({ 
-            
-            userFirstName: data.data.User.firstName,
-            userLastName: data.data.User.lastName,
-            ownerEmail: data.data.User.emailAddress,
-            title: data.data.title,
-            description: data.data.description,
-            estimatedTime: data.data.estimatedTime,
-            materialsNeeded: data.data.materialsNeeded,
-          });
-        
-      })
-      .catch((error) => {
-        console.log('Course not located', error);
-        this.props.history.push('/notfound');
-        
-        
-      });
-  }
+  
   // pull the current course details from state and populates them into the form
   componentDidMount() {
     const {context} = this.props;
     const authUser = context.authenticatedUser;
     const authUserEmail = authUser.emailAddress;
-    console.log(authUserEmail);
+    
     const id = this.props.match.params.id;
     axios(`http://localhost:5000/api/courses/${id}`)
       .then((data) => {
@@ -69,8 +42,13 @@ export default class UpdateCourse extends Component {
             estimatedTime: data.data.estimatedTime,
             materialsNeeded: data.data.materialsNeeded,
           });
+
+          if (authUserEmail !== data.data.User.emailAddress) {
+            this.props.history.push('/forbidden');
+          }
         
       })
+      
       .catch((error) => {
         console.log('Course not located', error);
         this.props.history.push('/notfound');
@@ -103,7 +81,9 @@ export default class UpdateCourse extends Component {
     
     
   return (
+    
     <div className='wrap'>
+    
       <h1>Update Course</h1>
       <br />
       <Form
