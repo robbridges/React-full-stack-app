@@ -22,12 +22,13 @@ export default class Courses extends Component {
       })
       .catch((error) => {
         console.log('Error fetching and parsing data', error);
-        this.props.history.push('/');
+        
       });
   }
 
- 
+  
 
+  
   
 
   // setting up on our context values and values to be used in react component  

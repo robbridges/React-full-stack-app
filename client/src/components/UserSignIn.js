@@ -74,16 +74,17 @@ export default class UserSignIn extends Component {
     // pulls the email and password from the form and compares it to the database. Returning successful
     submit = () => {
         const {context} = this.props;
+        const {from} = this.props.location.state || {from: {pathname: '/'} };
         const {emailAddress, password} = this.state;
+
         context.actions.signIn(emailAddress, password)
-    
-          .then(user => {
+            .then(user => {
             if (user === null) {
               this.setState(() => {
                 return {errors: ['Sign-in was unsuccessful'] };
               });
             } else {
-              this.props.history.push('/')
+              this.props.history.push(from);
               console.log(`Sucesss ${emailAddress} is signed in`);
             }
           })

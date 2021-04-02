@@ -13,9 +13,12 @@ import CourseDetail from './components/CourseDetail';
 import UpdateCourse from './components/UpdateCourse';
 import CreateCourse from './components/CreateCourse';
 import NotFound from './components/NotFound';
-import Error from './components/Error';
+import Error from './components/UnhandledError';
 import withContext from './Context';
 import PrivateRoute from './PrivateRoute';
+import Forbidden from './components/Forbidden';
+
+
 /* we are using our context class to make sure all the With context components below can access our database methods
 and user context saved in state */
 const UserSignUpWithContext = withContext(UserSignUp);
@@ -45,6 +48,7 @@ const App = () => (
           <Route path="/signup" component={UserSignUpWithContext} />
           <Route path="/signout" component={UserSignOutWithContext} />
           <Route path ="/error" component={Error} />
+          <Route path ="/forbidden" component={Forbidden} />
           <Route component={NotFound} />
           
           

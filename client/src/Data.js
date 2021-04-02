@@ -25,6 +25,15 @@ export default class Data {
         return fetch(url, options);
     }
     
+    async getCourse(id) {
+      const response = await this.getData(`/courses/${id}`, 'GET', null)
+      if(response.status === 200) {
+        return response.json().then(data => data)
+      } else {
+        throw new Error();
+      }
+    }
+
     // checks our database for a user that corresponds to email address and password
     async getUser(emailAddress, password) {
       const response = await this.api('/users', 'GET', null, true, {emailAddress, password});
@@ -34,8 +43,9 @@ export default class Data {
       }
       else if (response.status === 401) {
           return null;
-      }
-      else {
+      } else if (response.status === 500) {
+          this.props.history.push('/error');
+      } else {
           throw new Error();
       }
     }
@@ -51,8 +61,9 @@ export default class Data {
           return response.json().then(data => {
               return data.errors;
           });
-      }
-      else {
+      } else if (response.status === 500) {
+          this.props.history.push('/error');
+      } else {
           throw new Error();
       }
     }
@@ -66,11 +77,12 @@ export default class Data {
       return response.json().then(data => {
         return data.errors;
       });
-    }
-    else {
+    } else if (response.status === 500) {
+      this.props.history.push('/error');
+    } else {
       throw new Error();
     }
-    }
+  }
     // update course method from our database
     async updateCourse(id, course, emailAddress, password) {
     const response = await this.api('/courses/'+id, 'PUT', course, true, {emailAddress, password});
@@ -81,18 +93,23 @@ export default class Data {
       return response.json().then(data => {
         return data.errors;
       });
-    }
-    else {
+    } else if (response.status === 500) {
+      this.props.history.push('/error');
+    } else {
       throw new Error();
     }
   }
   // delete course method from our database
   async deleteCourse(id, emailAddress, password) {
-    const response = await this.api('/courses/'+id, 'DELETE', null, true, {emailAddress, password});
+    const response = await this.api('/courses/'+id, 'DELETE', null, true, {
+      emailAddress, 
+        password
+    });
     if (response.status === 204) {
       console.log('Course deleted')
-    }
-    else {
+    } else if (response.status === 500) {
+      this.props.history.push('/error');
+    } else {
       throw new Error();
     }
   }

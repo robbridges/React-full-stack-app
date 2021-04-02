@@ -16,29 +16,64 @@ export default class UpdateCourse extends Component {
     materialsNeeded: '',
     userFirstName: '',
     userLastName: '',
+    ownerEmail: '',
     errors: [],
 
   }
 
-  
-  // pull teh current course details from state and populates them into the form
-  componentDidMount() {
-    
+  getCourse = async () => {
+    const {context} = this.props;
+    const authUser = context.authenticatedUser;
+    const authUserEmail = authUser.emailAddress;
+    console.log(authUserEmail);
     const id = this.props.match.params.id;
     axios(`http://localhost:5000/api/courses/${id}`)
       .then((data) => {
-        this.setState({ 
-          
-          userFirstName: data.data.User.firstName,
-          userLastName: data.data.User.lastName,
-          title: data.data.title,
-          description: data.data.description,
-          estimatedTime: data.data.estimatedTime,
-          materialsNeeded: data.data.materialsNeeded,
-        });
+        
+          this.setState({ 
+            
+            userFirstName: data.data.User.firstName,
+            userLastName: data.data.User.lastName,
+            ownerEmail: data.data.User.emailAddress,
+            title: data.data.title,
+            description: data.data.description,
+            estimatedTime: data.data.estimatedTime,
+            materialsNeeded: data.data.materialsNeeded,
+          });
+        
       })
       .catch((error) => {
-        console.log('Error fetching and parsing data', error);
+        console.log('Course not located', error);
+        this.props.history.push('/notfound');
+        
+        
+      });
+  }
+  // pull the current course details from state and populates them into the form
+  componentDidMount() {
+    const {context} = this.props;
+    const authUser = context.authenticatedUser;
+    const authUserEmail = authUser.emailAddress;
+    console.log(authUserEmail);
+    const id = this.props.match.params.id;
+    axios(`http://localhost:5000/api/courses/${id}`)
+      .then((data) => {
+        
+          this.setState({ 
+            
+            userFirstName: data.data.User.firstName,
+            userLastName: data.data.User.lastName,
+            ownerEmail: data.data.User.emailAddress,
+            title: data.data.title,
+            description: data.data.description,
+            estimatedTime: data.data.estimatedTime,
+            materialsNeeded: data.data.materialsNeeded,
+          });
+        
+      })
+      .catch((error) => {
+        console.log('Course not located', error);
+        this.props.history.push('/notfound');
         
         
       });
