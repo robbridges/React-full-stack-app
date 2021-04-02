@@ -79,7 +79,7 @@ export default class CourseDetail extends Component {
                 errors: [`Course ${title} was not deleted from the database.`],
               };
             } else {
-              this.props.history.push('/');
+              window.location.href= '/';
             }
           })
           .catch((error) => {
@@ -114,7 +114,7 @@ render() {
             <Link className ="button" to={`/courses/${courseId}/update`} >
               Update Course
             </Link>
-            <Link className = "button" to=''  onClick={this.delete}>
+            <Link className = "button" to='/'  onClick={this.delete}>
               Delete Course
             </Link>
             <Link className="button" to="/">Return to List</Link>
