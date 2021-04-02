@@ -78,6 +78,7 @@ export default class CourseDetail extends Component {
               return {
                 errors: [`Course ${title} was not deleted from the database.`],
               };
+            //reload main index page, this removes the rendering glitch of the deleted course  
             } else {
               window.location.href= '/';
             }
