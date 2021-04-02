@@ -58,7 +58,8 @@ export default class UpdateCourse extends Component {
   }
   // returns user to main index
   cancel = () => {
-    this.props.history.push('/');
+    const id = this.props.match.params.id;
+    this.props.history.push(`/courses/${id}`);
   }
   
 

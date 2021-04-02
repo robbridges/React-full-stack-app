@@ -37,7 +37,7 @@ export default class CourseDetail extends Component {
       })
       .catch((error) => {
         console.log('Error fetching and parsing data', error);
-        this.props.history.push('/');
+        this.props.history.push('/notfound');
         
       });
   }
@@ -80,7 +80,7 @@ export default class CourseDetail extends Component {
               };
             //reload main index page, this removes the rendering glitch of the deleted course  
             } else {
-              window.location.href= '/';
+              window.location.reload();
             }
           })
           .catch((error) => {
@@ -115,7 +115,7 @@ render() {
             <Link className ="button" to={`/courses/${courseId}/update`} >
               Update Course
             </Link>
-            <Link className = "button" to='/'  onClick={this.delete}>
+            <Link className = "button" to=''  onClick={this.delete}>
               Delete Course
             </Link>
             <Link className="button" to="/">Return to List</Link>
