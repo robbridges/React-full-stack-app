@@ -90,12 +90,12 @@ render() {
       courseMaterialsNeeded,
       
     } = this.state;
-    const user = context.authenticatedUser || {id:null};
+    const user = context.authenticatedUser 
   return (
     <main>
       <div className ='actions--bar'>
           <div className ="wrap">
-          { user.emailAddress === userEmail ?
+          { user !== null && user.emailAddress === userEmail ?
           <React.Fragment>
             <Link className ="button" to={`/courses/${courseId}/update`} >
               Update Course

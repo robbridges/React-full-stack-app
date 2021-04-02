@@ -24,15 +24,21 @@ export default class Data {
 
         return fetch(url, options);
     }
-    
-    async getCourse(id) {
-      const response = await this.getData(`/courses/${id}`, 'GET', null)
+
+    async getAllCourses() {
+      const response = await this.api('/courses', 'GET', null)
       if(response.status === 200) {
-        return response.json().then(data => data)
+        return response.json().then(data => data);
+      } else if(response.status === 400) {
+        return response.json().then(data => {
+          return data.errors
+        })
       } else {
         throw new Error();
       }
     }
+    
+    
 
     // checks our database for a user that corresponds to email address and password
     async getUser(emailAddress, password) {

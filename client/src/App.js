@@ -21,6 +21,7 @@ import Forbidden from './components/Forbidden';
 
 /* we are using our context class to make sure all the With context components below can access our database methods
 and user context saved in state */
+const CoursesWithContext = withContext(Courses)
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
 const UserSignOutWithContext = withContext(UserSignOut);
@@ -40,7 +41,7 @@ const App = () => (
         <HeaderWithContext />
 
         <Switch>
-          <Route exact path="/" component={Courses} />
+          <Route exact path="/" component={CoursesWithContext} />
           <PrivateRoute path ="/courses/create" component={CreateCourseWithContext} />
           <PrivateRoute path ="/courses/:id/update" component={UpdateCourseWithConext} />
           <Route exact path ="/courses/:id" component={CourseDetailWithContext} />
