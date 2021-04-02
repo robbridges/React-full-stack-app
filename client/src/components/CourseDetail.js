@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link,  } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 
@@ -70,11 +70,25 @@ export default class CourseDetail extends Component {
     // create a confirmation window to make sure that the user does want to delete the course
     const confirmation = window.confirm(`Are you sure you want to delete the course "${course.title}"?`);
         if (confirmation) {
-            context.data.deleteCourse(id, user.emailAddress, user.password);
-            this.props.history.push('/')
+          context.data
+          .deleteCourse(id, user.emailAddress, user.password)
+          .then((errors) => {
+            if (errors) {
+              this.setState({ errors });
+              return {
+                errors: [`Course ${title} was not deleted from the database.`],
+              };
+            } else {
+              this.props.history.push('/');
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            this.props.history.push('/error');
+          });
+      };
             
-            
-    }
+    
   }
 // setting up on our context values and values to be used in react component  
 render() {
@@ -100,7 +114,7 @@ render() {
             <Link className ="button" to={`/courses/${courseId}/update`} >
               Update Course
             </Link>
-            <Link className = "button" to='/'  onClick={this.delete}>
+            <Link className = "button" to=''  onClick={this.delete}>
               Delete Course
             </Link>
             <Link className="button" to="/">Return to List</Link>
