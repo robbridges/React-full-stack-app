@@ -67,7 +67,7 @@ export default class Data {
           throw new Error();
       }
     }
-    // creates coursee in our database
+    // creates course in our database
     async createCourse(course, emailAddress, password) {
     const response = await this.api('/courses', 'POST', course, true, {emailAddress, password})
     if (response.status === 201) {
@@ -101,12 +101,16 @@ export default class Data {
   }
   // delete course method from our database
   async deleteCourse(id, emailAddress, password) {
-    const response = await this.api('/courses/'+id, 'DELETE', null, true, {
-      emailAddress, 
-        password
+    const response = await this.api(`/courses/${id}`, 'DELETE', null, true, {
+      emailAddress,
+      password,
     });
     if (response.status === 204) {
-      console.log('Course deleted')
+      console.log(`course successfully deleted by ${emailAddress}`);
+    } else if (response.status === 400) {
+      return response.json().then((data) => {
+        return data.errors;
+      });
     } else if (response.status === 500) {
       this.props.history.push('/error');
     } else {

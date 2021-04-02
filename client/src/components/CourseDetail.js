@@ -73,6 +73,7 @@ export default class CourseDetail extends Component {
             context.data.deleteCourse(id, user.emailAddress, user.password);
             this.props.history.push('/')
             
+            
     }
   }
 // setting up on our context values and values to be used in react component  
