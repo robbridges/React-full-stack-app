@@ -50,7 +50,7 @@ const App = () => (
           <Route path="/signout" component={UserSignOutWithContext} />
           <Route path ="/error" component={UnhandledError} />
           <Route path ="/forbidden" component={Forbidden} />
-          <Route path ="/notFound" component={NotFound} />
+          <Route path ="/notfound" component={NotFound} />
           <Route component={NotFound} />
           
           
